@@ -143,3 +143,5 @@ tableBody.addEventListener("click", async (e) => {
     renderExpenses();
   }
 });
+
+const API_URL = "https://travel-expense-api.onrender.com";
