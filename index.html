@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여행 가계부</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🌍 여행 가계부</h1>
+
+    <form id="expense-form">
+      <input type="date" id="date" required>
+      <input type="number" id="amount" placeholder="금액 (₩)" required>
+      <input type="text" id="category" placeholder="항목 (예: 식비)" required>
+      <input type="text" id="note" placeholder="메모">
+      <button type="submit">➕ 추가</button>
+    </form>
+
+    <div id="expense-list">
+      <h2>📋 지출 내역</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>금액</th>
+            <th>항목</th>
+            <th>메모</th>
+            <th>삭제</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </div>
+<div id="summary">
+  <h2>💰 총합: <span id="total-amount">₩0</span></h2>
+  <canvas id="categoryChart" width="400" height="400"></canvas>
+  <button id="downloadCSV">📄 CSV로 내보내기</button>
+</div>
+  <script src="script.js"></script>
+<!-- Chart.js 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
