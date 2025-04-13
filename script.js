@@ -106,3 +106,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderExpenses();
 });
+
+const API_URL = "https://travel1-zash.onrender.com";
+
+async function loadExpenses() {
+  const res = await fetch(API_URL);
+  expenses = await res.json();
+  renderExpenses();
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const date = document.getElementById("date").value;
+  const amount = parseInt(document.getElementById("amount").value);
+  const category = document.getElementById("category").value;
+  const note = document.getElementById("note").value;
+
+  const newExpense = { date, amount, category, note };
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newExpense)
+  });
+  const saved = await res.json();
+  expenses.push(saved);
+  renderExpenses();
+  form.reset();
+});
+
+tableBody.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    const index = e.target.dataset.index;
+    const id = expenses[index]._id;
+    await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    expenses.splice(index, 1);
+    renderExpenses();
+  }
+});
